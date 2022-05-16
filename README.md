@@ -15,3 +15,7 @@ uses: gh640/npm-outdated-action@v1
 with:
   cwd: ./src
 ```
+
+## Sample screenshots
+
+![screenshot](./assets/screenshot.png)
