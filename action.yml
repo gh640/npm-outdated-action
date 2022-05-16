@@ -1,0 +1,62 @@
+name: 'NPM outdated Action'
+description: 'Runs `npm outdated --json` and print the result to summary.'
+author: 'Goto Hayato'
+inputs:
+  cwd:
+    required: false
+    description: 'Working directory'
+outputs:
+  exitCode:
+    description: 'Exit code of the command'
+    value: ${{ steps.npm_outdated.outputs.exitCode }}
+  stdout:
+    description: 'Stdout of the command'
+    value: ${{ steps.npm_outdated.outputs.stdout }}
+  stderr:
+    description: 'Stderr of the command'
+    value: ${{ steps.npm_outdated.outputs.stderr }}
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/github-script@v6
+      with:
+        script: |
+          const options = {
+            ignoreReturnCode: true,
+          }
+          if (process.env.CWD) {
+            options.cwd = process.env.CWD
+          }
+
+          const { exitCode, stdout, stderr } = await exec.getExecOutput(`npm outdated --json`, [], options)
+
+          core.setOutput('exitCode', exitCode)
+          core.setOutput('stdout', stdout)
+          core.setOutput('stderr', stderr)
+
+          let report
+          try {
+            report = JSON.parse(stdout)
+          } catch (err) {
+            console.error(err)
+            return
+          }
+          const header = [
+            {data: "Name", header: true},
+            {data: "Current", header: true},
+            {data: "Latest", header: true},
+          ]
+          const rows = Object.entries(report).map(([name, data]) => {
+            return [name, data['current'], data['latest']]
+          })
+          core.summary
+            .addHeading('Outdated packages :broom:')
+            .addTable([header, ...rows])
+            .write()
+      env:
+        CWD: ${{ inputs.cwd }}
+      id: npm_outdated
+
+branding:
+  icon: 'play'
+  color: 'white'
