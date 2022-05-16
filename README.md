@@ -1,6 +1,6 @@
 # `npm-outdated-action`
 
-A composite action for GitHub Actions that runs `npm outdated --json` and print the result to summary.
+A composite action for GitHub Actions that runs `npm outdated --json` and prints the result to summary.
 
 ## Prerequisites
 
