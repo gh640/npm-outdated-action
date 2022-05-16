@@ -2,6 +2,10 @@
 
 A composite action for GitHub Actions that runs `npm outdated --json` and print the result to summary.
 
+## Prerequisites
+
+- `npm` v8 / v7
+
 ## Usage
 
 ```yaml
