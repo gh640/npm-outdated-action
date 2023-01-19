@@ -1,5 +1,5 @@
 name: 'NPM outdated Action'
-description: 'Runs `npm outdated --json` and print the result to summary.'
+description: 'Runs `npm outdated --json` and prints the result to summary.'
 author: 'Goto Hayato'
 inputs:
   cwd:
