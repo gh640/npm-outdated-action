@@ -20,6 +20,21 @@ with:
   cwd: ./src
 ```
 
+### Inputs
+
+| name | description |
+| --- | --- |
+| `cwd` | working directory |
+
+### Outputs
+
+| name | description |
+| --- | --- |
+| `exitCode` | exit code of the command |
+| `stdout` | standard output of the command |
+| `stderr` | standard error of the command |
+
 ## Sample screenshots
 
 ![screenshot](./assets/screenshot.png)
+
