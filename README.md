@@ -22,7 +22,16 @@ With `cwd` set:
     cwd: ./src
 ```
 
-You need to install the packages beforehand to display values of the `current` culumn.
+You need to install the packages beforehand to display values of the `current` column.
+
+You can use the `summary` output in other actions, for example to send an email or comment on your pull request
+```yaml
+- run: npm ci
+- uses: gh640/npm-outdated-action@v1
+  id: npm-outdated
+- name: Do something with the summary
+  run: echo ${{ steps.npm-outdated.outputs.summary }}
+```
 
 ### Inputs
 
@@ -34,6 +43,7 @@ You need to install the packages beforehand to display values of the `current` c
 
 | name | description |
 | --- | --- |
+| `summary` | summary of the action run, containing the table |
 | `exitCode` | exit code of the command |
 | `stdout` | standard output of the command |
 | `stderr` | standard error of the command |
