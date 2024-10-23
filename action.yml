@@ -46,8 +46,9 @@ runs:
             {data: "Current", header: true},
             {data: "Latest", header: true},
           ]
+          // `current` is not available when packages are not installed.
           const rows = Object.entries(report).map(([name, data]) => {
-            return [name, data['current'], data['latest']]
+            return [name, data['current'] || '-', data['latest']]
           })
           core.summary
             .addHeading('Outdated packages :broom:')
