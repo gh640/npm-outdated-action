@@ -58,7 +58,7 @@ runs:
             .addTable([header, ...rows])
             .write()
           // Set the summary output
-          core.setOutput('summary', core.summary._buffer)
+          core.setOutput('summary', core.summary.stringify())
       env:
         CWD: ${{ inputs.cwd }}
       id: npm_outdated
